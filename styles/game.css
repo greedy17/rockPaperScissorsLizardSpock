@@ -1,0 +1,30 @@
+.title {
+  text-align: center;
+  }
+  
+  img {
+  padding:2px;
+  border:6px solid #021a40;
+  }
+  
+  div {
+  text-align: center;
+  }
+  
+  button {
+  height: 50px;
+  width: 200px;
+  border-radius: 10px;
+  font-size: 20px;
+  }
+  
+  button:hover {
+  width: 240px;
+  height: 60px;
+  box-shadow: 5px 10px;
+  }
+  
+  body {
+  background: linear-gradient(to right, rgb(30, 91, 235), rgb(1, 72, 147));;
+  text-align: center;
+  }
