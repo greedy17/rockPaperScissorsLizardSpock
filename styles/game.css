@@ -16,6 +16,8 @@
   width: 200px;
   border-radius: 10px;
   font-size: 20px;
+  color: white;
+  background-color: indigo;
   }
   
   button:hover {
