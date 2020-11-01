@@ -60,10 +60,81 @@ class Game {
       alert("Player one scores!")
       this.playerOne.score += 1;
     }
-    else{
-      alert("tie!");
-      this.compareGestures();
+    else if(this.playerOne.gesture === "paper" && this.playerTwo.gesture === "rock"){
+      alert("Player one scores!")
+      this.playerOne.score += 1;
     }
+    else if(this.playerOne.gesture === "paper" && this.playerTwo.gesture === "spock"){
+      alert("Player one scores!")
+      this.playerOne.score += 1;
+    }
+    else if(this.playerOne.gesture === "scissors" && this.playerTwo.gesture === "paper"){
+      alert("Player one scores!")
+      this.playerOne.score += 1;
+    }
+    else if(this.playerOne.gesture === "scissors" && this.playerTwo.gesture === "lizard"){
+      alert("Player one scores!")
+      this.playerOne.score += 1;
+    }
+    else if(this.playerOne.gesture === "lizard" && this.playerTwo.gesture === "spock"){
+      alert("Player one scores!")
+      this.playerOne.score += 1;
+    }
+    else if(this.playerOne.gesture === "lizard" && this.playerTwo.gesture === "paper"){
+      alert("Player one scores!")
+      this.playerOne.score += 1;
+    }
+    else if(this.playerOne.gesture === "spock" && this.playerTwo.gesture === "scissors"){
+      alert("Player one scores!")
+      this.playerOne.score += 1;
+    }
+    else if(this.playerOne.gesture === "spock" && this.playerTwo.gesture === "rock"){
+      alert("Player one scores!")
+      this.playerOne.score += 1;
+    }
+      else if (this.playerTwo.gesture === "rock" && this.playerOne.gesture === "scissors"){
+        alert("Player two scores!")
+        this.playerTwo.score += 1;
+      }else if(this.playerTwo.gesture === "rock" && this.playerOne.gesture === "lizard"){
+        alert("Player two scores!")
+        this.playerTwo.score += 1;
+      }
+      else if(this.playerTwo.gesture === "paper" && this.playerOne.gesture === "rock"){
+        alert("Player two scores!")
+        this.playerTwo.score += 1;
+      }
+      else if(this.playerTwo.gesture === "paper" && this.playerOne.gesture === "spock"){
+        alert("Player two scores!")
+        this.playerTwo.score += 1;
+      }
+      else if(this.playerTwo.gesture === "scissors" && this.playerOne.gesture === "paper"){
+        alert("Player two scores!")
+        this.playerTwo.score += 1;
+      }
+      else if(this.playerTwo.gesture === "scissors" && this.playerOne.gesture === "lizard"){
+        alert("Player two scores!")
+        this.playerTwo.score += 1;
+      }
+      else if(this.playerTwo.gesture === "lizard" && this.playerOne.gesture === "spock"){
+        alert("Player two scores!")
+        this.playerTwo.score += 1;
+      }
+      else if(this.playerTwo.gesture === "lizard" && this.playerOne.gesture === "paper"){
+        alert("Player two scores!")
+        this.playerTwo.score += 1;
+      }
+      else if(this.playerTwo.gesture === "spock" && this.playerOne.gesture === "scissors"){
+        alert("Player two scores!")
+        this.playerTwo.score += 1;
+      }
+      else if(this.playerTwo.gesture === "spock" && this.playerOne.gesture === "rock"){
+        alert("Player two scores!")
+        this.playerTwo.score += 1;
+      }else if (this.playerOne.gesture === this.playerTwo.gesture){
+        alert("tie!");
+      }else{
+        alert("invalid selection!");
+      }
   }
 
   gameWinner(){
@@ -112,32 +183,25 @@ class Computer extends Player {
     this.gesture = this.gesture[Math.floor(Math.random() * this.gesture.length)];
   };
 }
- 
-/*let rpsls = [
-{gesture: "rock",
- beats: ["lizard", "scissors"],
- losesTo: ["paper", "spock"]}
- ,
- {gesture: "paper",
- beats: ["rock", "spock"],
- losesTo: ["scissors", "lizard"]}
- ,
- {gesture: "scissors",
- beats: ["paper", "lizard"],
- losesTo: ["rock", "spock"]}
- ,
- {gesture: "lizard",
- beats: ["spock", "paper"],
- losesTo: ["scissors", "rock"]}
- ,
- {gesture: "spock",
- beats: ["rock", "scissors"],
- losesTo: ["paper", "lizard"]},
-]*/
 
-class Gestures {
-  constructor(){
-    this.beats = beats;
-    this.losesTo = losesTo;
-  }
-}
+/*const rpsls = [
+  {gesture: "rock",
+   beats: ["lizard", "scissors"],
+   losesTo: ["paper", "spock"]}
+   ,
+   {gesture: "paper",
+   beats: ["rock", "spock"],
+   losesTo: ["scissors", "lizard"]}
+   ,
+   {gesture: "scissors",
+   beats: ["paper", "lizard"],
+   losesTo: ["rock", "spock"]}
+   ,
+   {gesture: "lizard",
+   beats: ["spock", "paper"],
+   losesTo: ["scissors", "rock"]}
+   ,
+   {gesture: "spock",
+   beats: ["rock", "scissors"],
+   losesTo: ["paper", "lizard"]},
+  ] */
