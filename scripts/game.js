@@ -1,19 +1,16 @@
 "use strict";
 
-/*class Game {
-  constructor(){
-    this.playerOne = new Human("Player One");
-    this.playerTwo = null;
+class Game {
+  constructor(playerOne, playerTwo, score, gesture){
+    this.playerOne = playerOne;
+    this.playerTwo = playerTwo;
+    this.score = score;
+    this.gesture = gesture;
   }
 
-  Playgame(){
+  playGame(){
     this.gameRules();
     this.singleOrMultiplayer();
-    this.playerOne.score < 3 && this.playerTwo.score < 3){
-      this.playerOne.selectGesture();
-      this.playerTwo.selectGesture();
-      this.compareGestures();
-    };
     this.gameWinner();
   }
 
@@ -25,22 +22,47 @@
     let numberOfPlayers = prompt("How many players, 1 or 2?");
     switch(numberOfPlayers){
       case "1":
-        this.playerTwo = new Computer("AI");
+      this.singlePlayer();  
       break;
       case "2":
-        this.playerTwo = new Human("Player Two");
+      this.multiPlayer();  
       break;
       default:
       this.Playgame();
     }
-  }  
+  } 
+  
+  singlePlayer(){
+    this.playerOne = new Human("Player One", 0);
+    this.playerTwo = new Computer("Player two", 0, ["rock", "paper", "scissors", "lizard", "spock"]);
+    while(this.playerOne.score < 3 && this.playerTwo.score < 3){
+    this.playerOne.selectGesture();
+    this.playerTwo.selectGesture();
+    this.compareGestures()
+    }
+  }
+
+  multiPlayer(){
+    this.playerOne = new Human("Player One", 0);
+    this.playerTwo = new Human("Player two", 0);
+    while(this.playerOne.score < 3 && this.playerTwo.score < 3){
+    this.playerOne.selectGesture();
+    this.playerTwo.selectGesture();
+    this.compareGestures()
+    }
+  }
 
   compareGestures(){
-    let pog = this.playerOne.gesture;
-    let ptg = this.playerTwo.gesture;
-    if(pog === "scissors" && ptg === "paper"){
-      alert("Scissors custs paper!");
+    if (this.playerOne.gesture === "rock" && this.playerTwo.gesture === "scissors"){
+      alert("Player one scores!")
       this.playerOne.score += 1;
+    }else if(this.playerOne.gesture === "rock" && this.playerTwo.gesture === "lizard"){
+      alert("Player one scores!")
+      this.playerOne.score += 1;
+    }
+    else{
+      alert("tie!");
+      this.compareGestures();
     }
   }
 
@@ -58,11 +80,11 @@ class Player {
   constructor(name){
     this.name = name;
     this.score = 0;
-    this.gestures = ["rock, paper, scissors, lizard, spock"];
+    this.gesture = null;
   }
   
   selectGesture(){
-    gesture = prompt(this.name + " select a gesture: rock, paper, scissors, lizard, or spock");
+    this.gesture = prompt(this.name + " select a gesture: rock, paper, scissors, lizard, or spock");
   }
 }
 
@@ -71,25 +93,27 @@ class Human extends Player {
     super(name, score, gesture);
     this.name = name;
     this.score = 0;
-    this.gesture = gesture;
+    this.gesture = null;
   }
 
   selectGesture(){
-    let gesture = prompt("Select a gesture: rock, paper, scissors, lizard, or spock");
+    this.gesture = prompt(this.name + " select a gesture: rock, paper, scissors, lizard, or spock");
   }
 }
 
 class Computer extends Player {
-  constructor(name){
-    super(name, score, gestures);
+  constructor(name, score, gesture){
+    super(name, score, gesture);
+    this.name = name;
+    this.score = 0;
+    this.gesture = gesture;
   }
   selectGesture(){
-    gesture = this.gestures[Math.floor(Math.random() * this.gestures.length)];
+    this.gesture = this.gesture[Math.floor(Math.random() * this.gesture.length)];
   };
-}*/
-
-let rpsls = [
-  
+}
+ 
+/*let rpsls = [
 {gesture: "rock",
  beats: ["lizard", "scissors"],
  losesTo: ["paper", "spock"]}
@@ -109,5 +133,11 @@ let rpsls = [
  {gesture: "spock",
  beats: ["rock", "scissors"],
  losesTo: ["paper", "lizard"]},
+]*/
 
-]
+class Gestures {
+  constructor(){
+    this.beats = beats;
+    this.losesTo = losesTo;
+  }
+}
