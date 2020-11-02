@@ -22,7 +22,7 @@ class Game {
       this.multiPlayer();  
       break;
       default:
-      this.Playgame();
+      this.singleOrMultiplayer();
     }
   } 
   
