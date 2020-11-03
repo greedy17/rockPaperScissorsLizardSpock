@@ -47,7 +47,7 @@ class Game {
     }else if(this.playerOne.gesture[0].beats.includes(this.playerTwo.selection)){
       this.playerOne.score += 1;
       alert("Player one scores!")
-    }else if(this.playerOne.gesture === this.playerTwo.gesture){
+    }else if(this.playerOne.gesture[0].gesture === this.playerTwo.selection){
       alert("tie!")
     }else{
       this.compareGestures();
@@ -117,7 +117,7 @@ class Player {
         return false;
       }
     })
-    return this.gesture[0];
+    return this.gesture;
   }
 
 }
@@ -130,7 +130,7 @@ class Human extends Player {
     this.selection = selection;
     this.gesture = gesture;
   }
-
+  //add validation , program will be complete
   selectGesture(){
     this.selection = prompt(this.name + " select a gesture: rock, paper, scissors, lizard, or spock");
   }
