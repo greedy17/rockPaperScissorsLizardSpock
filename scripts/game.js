@@ -1,11 +1,12 @@
 "use strict";
 
 class Game {
-  constructor(playerOne, playerTwo, score, gesture){
+  constructor(playerOne, playerTwo, score, gesture, selection){
     this.playerOne = playerOne;
     this.playerTwo = playerTwo;
     this.score = score;
     this.gesture = gesture;
+    this.selection = selection;
   }
 
   gameRules(){
@@ -39,90 +40,18 @@ class Game {
   compareGestures(){
     this.playerOne.selectGesture();
     this.playerTwo.selectGesture();
-    if (this.playerOne.gesture === "rock" && this.playerTwo.gesture === "scissors"){
-      alert("Player one scores!");
-      this.playerOne.score += 1;
-    }else if(this.playerOne.gesture === "rock" && this.playerTwo.gesture === "lizard"){
-      alert("Player one scores!");
-      this.playerOne.score += 1;
-    }
-    else if(this.playerOne.gesture === "paper" && this.playerTwo.gesture === "rock"){
-      alert("Player one scores!");
-      this.playerOne.score += 1;
-    }
-    else if(this.playerOne.gesture === "paper" && this.playerTwo.gesture === "spock"){
-      alert("Player one scores!");
-      this.playerOne.score += 1;
-    }
-    else if(this.playerOne.gesture === "scissors" && this.playerTwo.gesture === "paper"){
-      alert("Player one scores!");
-      this.playerOne.score += 1;
-    }
-    else if(this.playerOne.gesture === "scissors" && this.playerTwo.gesture === "lizard"){
-      alert("Player one scores!");
-      this.playerOne.score += 1;
-    }
-    else if(this.playerOne.gesture === "lizard" && this.playerTwo.gesture === "spock"){
-      alert("Player one scores!");
-      this.playerOne.score += 1;
-    }
-    else if(this.playerOne.gesture === "lizard" && this.playerTwo.gesture === "paper"){
-      alert("Player one scores!");
-      this.playerOne.score += 1;
-    }
-    else if(this.playerOne.gesture === "spock" && this.playerTwo.gesture === "scissors"){
-      alert("Player one scores!");
-      this.playerOne.score += 1;
-    }
-    else if(this.playerOne.gesture === "spock" && this.playerTwo.gesture === "rock"){
-      alert("Player one scores!");
-      this.playerOne.score += 1;
-    }
-    else if (this.playerTwo.gesture === "rock" && this.playerOne.gesture === "scissors"){
+    this.playerOne.selectObject(this.playerOne.selection);
+    if(this.playerOne.gesture[0].losesTo.includes(this.playerTwo.selection)){
+      this.playerTwo.score += 1;
       alert("Player two scores!");
-      this.playerTwo.score += 1;
-    }else if(this.playerTwo.gesture === "rock" && this.playerOne.gesture === "lizard"){
-      alert("Player two scores!");
-      this.playerTwo.score += 1;
-    }
-    else if(this.playerTwo.gesture === "paper" && this.playerOne.gesture === "rock"){
-      alert("Player two scores!");
-      this.playerTwo.score += 1;
-    }
-    else if(this.playerTwo.gesture === "paper" && this.playerOne.gesture === "spock"){
-      alert("Player two scores!");
-      this.playerTwo.score += 1;
-    }
-    else if(this.playerTwo.gesture === "scissors" && this.playerOne.gesture === "paper"){
-      alert("Player two scores!");
-      this.playerTwo.score += 1;
-    }
-    else if(this.playerTwo.gesture === "scissors" && this.playerOne.gesture === "lizard"){
-      alert("Player two scores!")
-      this.playerTwo.score += 1;
-    }
-    else if(this.playerTwo.gesture === "lizard" && this.playerOne.gesture === "spock"){
-      alert("Player two scores!");
-      this.playerTwo.score += 1;
-    }
-    else if(this.playerTwo.gesture === "lizard" && this.playerOne.gesture === "paper"){
-      alert("Player two scores!");
-      this.playerTwo.score += 1;
-    }
-    else if(this.playerTwo.gesture === "spock" && this.playerOne.gesture === "scissors"){
-      alert("Player two scores!");
-      this.playerTwo.score += 1;
-    }
-    else if(this.playerTwo.gesture === "spock" && this.playerOne.gesture === "rock"){
-      alert("Player two scores!");
-      this.playerTwo.score += 1;
-    }else if(this.playerTwo.gesture === this.playerOne.gesture){
-      alert("Tie!");
+    }else if(this.playerOne.gesture[0].beats.includes(this.playerTwo.selection)){
+      this.playerOne.score += 1;
+      alert("Player one scores!")
+    }else if(this.playerOne.gesture === this.playerTwo.gesture){
+      alert("tie!")
     }else{
-      this.compareGestures;
+      this.compareGestures();
     }
-    this.playerOne.gesture = null;
-    this.playerTwo.gesture = null;
   }
 
 
@@ -146,39 +75,88 @@ class Game {
 }
 
 class Player {
-  constructor(name){
+  constructor(name,score,selection, gesture){
     this.name = name;
-    this.score = 0;
-    this.gesture = null;
-  }
+    this.score = score;
+    this.selection = selection;
+    this.gesture = gesture;
+    this.gestures = [
+      {gesture: "rock",
+      beats: ["lizard", "scissors"],
+      losesTo: ["paper", "spock"]}
+      ,
+      {gesture: "paper",
+      beats: ["rock", "spock"],
+      losesTo: ["scissors", "lizard"]}
+      ,
+      {gesture: "scissors",
+      beats: ["paper", "lizard"],
+      losesTo: ["rock", "spock"]}
+      ,
+      {gesture: "lizard",
+      beats: ["spock", "paper"],
+      losesTo: ["scissors", "rock"]}
+      ,
+      {gesture: "spock",
+      beats: ["rock", "scissors"],
+      losesTo: ["paper", "lizard"]}
+      ];
   
-  selectGesture(){
-    this.gesture = prompt(this.name + " select a gesture: rock, paper, scissors, lizard, or spock");
   }
+
+  selectGesture(){
+    this.selection = prompt(this.name + " select a gesture: rock, paper, scissors, lizard, or spock");
+  }
+
+  selectObject(selection){
+    this.selection === selection;
+    this.gesture = this.gestures.filter(function(i){
+      if(i.gesture === this.selection){
+        return true;
+      }else{
+        return false;
+      }
+    })
+    return this.gesture[0];
+  }
+
 }
 
 class Human extends Player {
-  constructor(name, score, gesture){
-    super(name, score, gesture);
+  constructor(name, score, selection, gesture){
+    super(name, score, selection, gesture);
     this.name = name;
     this.score = 0;
-    this.gesture = null;
+    this.selection = selection;
+    this.gesture = gesture;
   }
 
   selectGesture(){
-    this.gesture = prompt(this.name + " select a gesture: rock, paper, scissors, lizard, or spock");
+    this.selection = prompt(this.name + " select a gesture: rock, paper, scissors, lizard, or spock");
   }
+
+  selectObject(selection){
+    this.gesture = this.gestures.filter(function(i){
+      if(i.gesture === selection){
+        return true;
+      }else{
+        return false;
+      }
+    })
+    return this.gesture[0];
+  }
+
 }
 
 class Computer extends Player {
-  constructor(name, score, gesture, random){
+  constructor(name, score, gesture, random, selection){
     super(name, score, gesture, random);
     this.name = name;
     this.score = 0;
-    this.gesture = null;
+    this.selection = selection;
     this.random = ["rock", "paper", "scissors", "lizard", "spock"];
   }
   selectGesture(){
-    this.gesture = this.random[Math.floor(Math.random() * this.random.length)];
+    this.selection = this.random[Math.floor(Math.random() * this.random.length)];
   };
 }
