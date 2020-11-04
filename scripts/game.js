@@ -1,5 +1,7 @@
 "use strict";
 
+let validGestures = ["rock","paper","scissors","lizard","spock"];
+
 class Game {
   constructor(playerOne, playerTwo, score, gesture, selection){
     this.playerOne = playerOne;
@@ -71,7 +73,6 @@ class Game {
    }
    this.gameWinner();
  }
-
 }
 
 class Player {
@@ -103,36 +104,21 @@ class Player {
       ];
   
   }
-
-  selectGesture(){
-    this.selection = prompt(this.name + " select a gesture: rock, paper, scissors, lizard, or spock");
-  }
-
-  selectObject(selection){
-    this.selection === selection;
-    this.gesture = this.gestures.filter(function(i){
-      if(i.gesture === this.selection){
-        return true;
-      }else{
-        return false;
-      }
-    })
-    return this.gesture;
-  }
-
 }
 
 class Human extends Player {
   constructor(name, score, selection, gesture){
     super(name, score, selection, gesture);
-    this.name = name;
-    this.score = 0;
-    this.selection = selection;
-    this.gesture = gesture;
   }
-  //add validation , program will be complete
+
   selectGesture(){
-    this.selection = prompt(this.name + " select a gesture: rock, paper, scissors, lizard, or spock");
+    this.selection = prompt(this.name + " select a gesture: rock, paper, scissors, lizard, or spock").toLowerCase()
+    if(validGestures.includes(this.selection)){
+      return this.selection;
+    }else{
+      alert("invalid selection, try again.");
+      this.selectGesture();
+    }
   }
 
   selectObject(selection){
@@ -145,17 +131,15 @@ class Human extends Player {
     })
     return this.gesture[0];
   }
-
 }
 
 class Computer extends Player {
   constructor(name, score, gesture, random, selection){
     super(name, score, gesture, random);
-    this.name = name;
-    this.score = 0;
     this.selection = selection;
     this.random = ["rock", "paper", "scissors", "lizard", "spock"];
   }
+
   selectGesture(){
     this.selection = this.random[Math.floor(Math.random() * this.random.length)];
   };
